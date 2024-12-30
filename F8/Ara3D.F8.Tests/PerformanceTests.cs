@@ -41,8 +41,12 @@ namespace Ara3D.F8.Tests
                     sw2.Stop();
                 }
 
-                Console.WriteLine($"Test 1 took {sw1.ElapsedMilliseconds} msec with {input1.Length} input elements and {NumIterations} iterations");
-                Console.WriteLine($"Test 2 took {sw2.ElapsedMilliseconds} msec with {input2.Length} input elements and {NumIterations} iterations");
+                Console.WriteLine($"The SIMD version took {sw1.ElapsedMilliseconds} msec with {input1.Length} input elements and {NumIterations} iterations");
+                Console.WriteLine($"The Scalar version took {sw2.ElapsedMilliseconds} msec with {input2.Length} input elements and {NumIterations} iterations");
+
+                var ratio = (float)sw2.ElapsedMilliseconds / (float)sw1.ElapsedMilliseconds;
+                var speedUpPercentage = (ratio - 1f) * 100f;
+                Console.WriteLine($"The SIMD version was {speedUpPercentage:F1}% faster");
             }
             catch (Exception e)
             {
@@ -254,6 +258,25 @@ namespace Ara3D.F8.Tests
             }
         }
 
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void ComputeCircles(float[] inputs, float[] outputs)
+        {
+            for (int i = 0; i < inputs.Length; i++)
+            {
+                (outputs[i * 2], outputs[i * 2 + 1]) = MathF.SinCos(inputs[i]);
+            }
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void ComputeSimdCircles(f8[] inputs, f8[] outputs)
+        {
+            for (int i = 0; i < inputs.Length; i++)
+            {
+                (outputs[i * 2], outputs[i * 2 + 1]) = inputs[i].SinCos();
+            }
+        }
+
         //==============================================================
         // Tests
         //==============================================================
@@ -366,6 +389,21 @@ namespace Ara3D.F8.Tests
 
             RunComparison(input1, input2, output1, output2,
                 ComputeSimdUVs, ComputeUVs);
+        }
+
+        [Test]
+        public static void CircleBenchmark()
+        {
+            var n1 = RandomInputs.SimdFloats.Length / 4;
+            var n2 = RandomInputs.Floats.Length / 4;
+            var input1 = RandomInputs.SimdFloats.Take(n1).ToArray();
+            var input2 = RandomInputs.Floats.Take(n2).ToArray();
+
+            var output1 = new f8[n1 * 2];
+            var output2 = new float[n2 * 2];
+
+            RunComparison(input1, input2, output1, output2,
+                ComputeSimdCircles, ComputeCircles);
         }
     }
 }
