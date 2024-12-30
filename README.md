@@ -80,7 +80,7 @@ public readonly struct SimdVector3
 }
 ```
 
-## Peformance Benefits 
+## Performance Benefits 
 
 Using `f8` in a number of benchmarks we have observed consistent performance benefits (in terms of execution speed) from 
 25% to 350%.  
