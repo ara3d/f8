@@ -4,7 +4,8 @@ An easy to use C# SIMD library designed for common use cases.
 
 ## About 
 
-This is a C# library for .NET 9 that provides a single data structure called `f8`. The `f8` data type is a 
+This is a C# library for .NET 9 that provides a single data structure called `f8`. The 
+[`f8` data type](https://github.com/ara3d/f8/blob/main/F8/Ara3D.F8/f8.cs) is a 
 readonly struct that contains 8 floats and that is designed to be used much in the same way a `float` type is already used in C#. 
 
 It provides a number of operators and methods that allow you to perform common math and arithemetic operations on multiple 
