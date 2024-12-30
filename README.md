@@ -1,6 +1,6 @@
 # Ara3D.F8
 
-An easy to use C# SIMD library designed for common use cases. 
+An easy to use C# [SIMD](https://en.wikipedia.org/wiki/Single_instruction,_multiple_data) library designed for common use cases. 
 
 ## About 
 
