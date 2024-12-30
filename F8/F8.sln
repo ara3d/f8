@@ -7,6 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ara3D.F8", "Ara3D.F8\Ara3D.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ara3D.F8.Tests", "Ara3D.F8.Tests\Ara3D.F8.Tests.csproj", "{BC55DAB3-25FE-4A3A-A84D-E83410B6D8B7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{20905719-E854-4AAB-B9F5-2C29B1D372D2}"
+	ProjectSection(SolutionItems) = preProject
+		..\README.md = ..\README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

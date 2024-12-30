@@ -18,5 +18,8 @@ namespace Ara3D.F8.Tests
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public f8 Perimeter() => (B - A).Length() + (C - B).Length() + (A - C).Length();
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public SimdVector3 Barycentric(f8 u, f8 v) => A * (1 - u - v) + B * u + C * v;
     }
 }

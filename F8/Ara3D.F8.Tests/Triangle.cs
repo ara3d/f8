@@ -19,5 +19,8 @@ namespace Ara3D.F8.Tests
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public float Perimeter() => (B - A).Length() + (C - B).Length() + (A - C).Length();
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public Vector3 Barycentric(float u, float v) => A * (1 - u - v) + B * u + C * v;
     }
 }
