@@ -11,7 +11,7 @@ readonly struct that contains 8 floats and that is designed to be used much in t
 It provides a number of operators and methods that allow you to perform common math and arithemetic operations on multiple 
 numbers simultaneously leveraging SIMD intrinsics.
 
-The `f8` struct is implemented as a wrapper around `Vector256&lt;float&gt;`. 
+The `f8` struct is implemented as a wrapper around `Vector256<float>`. 
 This particular size of SIMD data type was chosen over `Vector128` and `Vector512` due to 
 the ubiquity of Vector256 operations 
 known as [AVX](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions) 
