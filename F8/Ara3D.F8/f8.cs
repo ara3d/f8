@@ -1,6 +1,4 @@
-﻿using System;
-using System.Numerics;
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
 using System.Runtime.InteropServices;
@@ -41,7 +39,7 @@ namespace Ara3D.F8
             => Value = Vector256.Create(f0, f1, f2, f3, f4, f5, f6, f7);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public f8(Vector128<float> upper, Vector128<float> lower) => Value = Vector256.Create(lower, upper);
+        public f8(in Vector128<float> upper, in Vector128<float> lower) => Value = Vector256.Create(lower, upper);
 
         //-------------------------------------------------------------------------------------
         // Implicit operators 
@@ -96,28 +94,28 @@ namespace Ara3D.F8
         //-------------------------------------------------------------------------------------
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static f8 operator +(in f8 left, in f8 right) => Vector256.Add<float>(left.Value, right.Value);
+        public static f8 operator +(in f8 left, in f8 right) => Vector256.Add(left.Value, right.Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static f8 operator -(in f8 left, in f8 right) => Vector256.Subtract(left.Value, right.Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static f8 operator *(in f8 left, in f8 right) => Vector256.Multiply<float>(left.Value, right.Value);
+        public static f8 operator *(in f8 left, in f8 right) => Vector256.Multiply(left.Value, right.Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static f8 operator *(in f8 left, float scalar) => Vector256.Multiply<float>(left.Value, scalar);
+        public static f8 operator *(in f8 left, float scalar) => Vector256.Multiply(left.Value, scalar);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static f8 operator *(float scalar, in f8 right) => Vector256.Multiply(scalar, right);
+        public static f8 operator *(float scalar, in f8 right) => Vector256.Multiply(scalar, right.Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static f8 operator /(in f8 left, in f8 right) => Vector256.Divide<float>(left, right);
+        public static f8 operator /(in f8 left, in f8 right) => Vector256.Divide(left.Value, right.Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static f8 operator /(in f8 left, float scalar) => Vector256.Divide<float>(left.Value, scalar);
+        public static f8 operator /(in f8 left, float scalar) => Vector256.Divide(left.Value, scalar);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static f8 operator -(in f8 value) => Vector256.Negate<float>(value);
+        public static f8 operator -(in f8 value) => Vector256.Negate(value.Value);
 
         //-------------------------------------------------------------------------------------
         // Bitwise functions
@@ -139,7 +137,7 @@ namespace Ara3D.F8
         public static f8 operator^(in f8 a, in f8 b) => Vector256.Xor(a.Value, b.Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static f8 ConditionalSelect(f8 condition, f8 a, f8 b) => Vector256.ConditionalSelect(condition.Value, a.Value, b.Value);
+        public static f8 ConditionalSelect(in f8 condition, in f8 a, in f8 b) => Vector256.ConditionalSelect(condition.Value, a.Value, b.Value);
 
         //-------------------------------------------------------------------------------------
         // Comparison operators 
@@ -193,16 +191,16 @@ namespace Ara3D.F8
         public f8 Ceiling() => Vector256.Ceiling(Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public f8 Clamp(in f8 min, in f8 max) => Vector256.Clamp(Value, min, max);
+        public f8 Clamp(in f8 min, in f8 max) => Vector256.Clamp(Value, min.Value, max.Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public f8 DegreesToRadians() => Vector256.DegreesToRadians(Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public f8 CopySign(in f8 value, in f8 sign) => Vector256.CopySign<float>(value, sign);
+        public f8 CopySign(in f8 value, in f8 sign) => Vector256.CopySign(value.Value, sign.Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Dot(in f8 a, in f8 b) => Vector256.Dot<float>(a, b);
+        public static float Dot(in f8 a, in f8 b) => Vector256.Dot(a.Value, b.Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public f8 Exp() => Vector256.Exp(Value);
@@ -211,7 +209,7 @@ namespace Ara3D.F8
         public f8 Floor() => Vector256.Floor(Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static f8 Hypot(in f8 x, in f8 y) => Vector256.Hypot(x, y);
+        public static f8 Hypot(in f8 x, in f8 y) => Vector256.Hypot(x.Value, y.Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public f8 IsNaN() => Vector256.IsNaN(Value);
@@ -229,7 +227,7 @@ namespace Ara3D.F8
         public f8 IsZero() => Vector256.IsZero(Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static f8 Lerp(Vector256<float> a, Vector256<float> b, Vector256<float> t) => Vector256.Lerp(a, b, t);
+        public static f8 Lerp(in f8 a, in f8 b, in f8 t) => Vector256.Lerp(a.Value, b.Value, t.Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public f8 Log() => Vector256.Log(Value);
