@@ -1,6 +1,6 @@
 # Ara3D.F8
 
-An easy to use C# SIMD library designed for common use cases. 
+An easy to use C# [SIMD](https://en.wikipedia.org/wiki/Single_instruction,_multiple_data) library designed for common use cases. 
 
 ## About 
 
@@ -9,13 +9,14 @@ This is a C# library for .NET 9 that provides a single data structure called `f8
 readonly struct that contains 8 floats and that is designed to be used much in the same way a `float` type is already used in C#. 
 
 It provides a number of operators and methods that allow you to perform common math and arithemetic operations on multiple 
-numbers simultaneously leveraging SIMD intrinsics.
+numbers simultaneously leveraging SIMD intrinsics. Intrinsics are special methods that _may_ be mapped to specialized assembly opcodes
+by the [C# JIT Compiler](https://learn.microsoft.com/en-us/dotnet/standard/managed-execution-process). 
 
-The `f8` struct is implemented as a wrapper around `Vector256&lt;float&gt;`. 
+The `f8` struct is implemented as a wrapper around [`Vector256<float>`](https://learn.microsoft.com/en-us/dotnet/api/system.runtime.intrinsics.vector256-1?view=net-9.0). 
 This particular size of SIMD data type was chosen over `Vector128` and `Vector512` due to 
-the ubiquity of Vector256 operations 
-known as [AVX](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions) 
-on modern desktop and laptop computers. 
+the ubiquity of 256-bit operations 
+known as [AVX](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions)  
+on modern desktop and laptop computers.  
 
 ## Motivation 
 
@@ -26,9 +27,9 @@ because they operate on wide registers that can hold multiple values.
 > Note: in practice the performance benefits of using SIMD instrinsics are often far less than 8x. See the section 
 below on [performance benefits](#performance-benefits) for more details.
 
-One challenge with SIMD intrinsics is that they are not easy to use, and can force programmers to write
-code that is non-idiomatic. Ideally as a programmer we want to express algorithms in a straightforward way,
-that maps to the problem domain. 
+One challenge with SIMD intrinsics is that they are not easy to use, and can require programmers to write
+code that is significantly more complex and non-idiomatic.
+Ideally as a programmer we want to express algorithms in a straightforward and familiar way. 
 
 Using `f8` we can write data-parallel code in the same way we would write scalar code. 
 Consider for example the following code for computing the quadratic formula for a set of inputs. 
