@@ -21,8 +21,8 @@ namespace Ara3D.d4
         public d4(double scalar) => Value = Vector256.Create(scalar);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public d4(double f0, double f1, double f2, double f3, double f4)
-            => Value = Vector256.Create(f0, f1, f2, f3, f4);
+        public d4(double d0, double d1, double d2, double d3)
+            => Value = Vector256.Create(d0, d1, d2, d3);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public d4(Vector128<double> upper, Vector128<double> lower) => Value = Vector256.Create(lower, upper);
@@ -63,7 +63,7 @@ namespace Ara3D.d4
         public int Count
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => 8;
+            get => 4;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -269,7 +269,7 @@ namespace Ara3D.d4
         //-------------------------------------------------------------------------------------
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public d4 WithElement(int i, double f) => Vector256.WithElement(this, i, f);
+        public d4 WithElement(int i, double d) => Vector256.WithElement(this, i, d);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public d4 WithLower(Vector128<double> lower) => Vector256.WithLower(this, lower);
@@ -282,7 +282,7 @@ namespace Ara3D.d4
         //-------------------------------------------------------------------------------------
 
         public override string ToString()
-            => $"[{this[0]}, {this[1]}, {this[2]}, {this[3]}, {this[4]}, {this[5]}, {this[6]}, {this[7]}]";
+            => $"[{this[0]}, {this[1]}, {this[2]}, {this[3]}]";
 
         public override bool Equals(object? obj)
             => obj is d4 other && Vector256.EqualsAll(Value, other.Value);
