@@ -13,9 +13,9 @@ namespace Ara3D.F8
     /// widely available on the CPUs of most modern laptop and desktop computers. 
     /// https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX
     ///  
-    /// Working with SIMD types and intrinsics in C# however can be quite confusing for the uninitiated.
+    /// Working with SIMD types and intrinsics C# however can be quite confusing for the uninitiated.
     /// There are over a thousand intrinsic opcodes, and many are poorly documented, and scattered across dozens of classes. 
-    /// ChatGPT is unaware of recent introductions of utility functions in .NET 9 that make working with SIMD types much easier.
+    /// ChatGPT is unaware of recent introductions of utility functions .NET 9 that make working with SIMD types much easier.
     ///
     /// This class provides a wrapper around the Vector256&lt;float&gt; type and provides many of the basic math operations
     /// </summary>
@@ -39,17 +39,17 @@ namespace Ara3D.F8
             => Value = Vector256.Create(f0, f1, f2, f3, f4, f5, f6, f7);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public f8(in Vector128<float> upper, in Vector128<float> lower) => Value = Vector256.Create(lower, upper);
+        public f8(Vector128<float> upper, Vector128<float> lower) => Value = Vector256.Create(lower, upper);
 
         //-------------------------------------------------------------------------------------
         // Implicit operators 
         //-------------------------------------------------------------------------------------
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static implicit operator Vector256<float>(in f8 value) => value.Value;
+        public static implicit operator Vector256<float>(f8 value) => value.Value;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static implicit operator f8(in Vector256<float> value) => new(value);
+        public static implicit operator f8(Vector256<float> value) => new(value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator f8(float value) => new(value);
@@ -94,82 +94,82 @@ namespace Ara3D.F8
         //-------------------------------------------------------------------------------------
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static f8 operator +(in f8 left, in f8 right) => Vector256.Add(left.Value, right.Value);
+        public static f8 operator +(f8 left, f8 right) => Vector256.Add(left.Value, right.Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static f8 operator -(in f8 left, in f8 right) => Vector256.Subtract(left.Value, right.Value);
+        public static f8 operator -(f8 left, f8 right) => Vector256.Subtract(left.Value, right.Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static f8 operator *(in f8 left, in f8 right) => Vector256.Multiply(left.Value, right.Value);
+        public static f8 operator *(f8 left, f8 right) => Vector256.Multiply(left.Value, right.Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static f8 operator *(in f8 left, float scalar) => Vector256.Multiply(left.Value, scalar);
+        public static f8 operator *(f8 left, float scalar) => Vector256.Multiply(left.Value, scalar);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static f8 operator *(float scalar, in f8 right) => Vector256.Multiply(scalar, right.Value);
+        public static f8 operator *(float scalar, f8 right) => Vector256.Multiply(scalar, right.Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static f8 operator /(in f8 left, in f8 right) => Vector256.Divide(left.Value, right.Value);
+        public static f8 operator /(f8 left, f8 right) => Vector256.Divide(left.Value, right.Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static f8 operator /(in f8 left, float scalar) => Vector256.Divide(left.Value, scalar);
+        public static f8 operator /(f8 left, float scalar) => Vector256.Divide(left.Value, scalar);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static f8 operator -(in f8 value) => Vector256.Negate(value.Value);
+        public static f8 operator -(f8 value) => Vector256.Negate(value.Value);
 
         //-------------------------------------------------------------------------------------
         // Bitwise functions
         //-------------------------------------------------------------------------------------
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static f8 AndNot(in f8 a, in f8 b) => Vector256.AndNot(a.Value, b.Value);
+        public static f8 AndNot(f8 a, f8 b) => Vector256.AndNot(a.Value, b.Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static f8 operator &(in f8 a, in f8 b) => Vector256.BitwiseAnd(a.Value, b.Value);
+        public static f8 operator &(f8 a, f8 b) => Vector256.BitwiseAnd(a.Value, b.Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static f8 operator |(in f8 a, in f8 b) => Vector256.BitwiseOr(a.Value, b.Value);
+        public static f8 operator |(f8 a, f8 b) => Vector256.BitwiseOr(a.Value, b.Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static f8 operator ~(in f8 a) => Vector256.OnesComplement(a.Value);
+        public static f8 operator ~(f8 a) => Vector256.OnesComplement(a.Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static f8 operator^(in f8 a, in f8 b) => Vector256.Xor(a.Value, b.Value);
+        public static f8 operator^(f8 a, f8 b) => Vector256.Xor(a.Value, b.Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static f8 ConditionalSelect(in f8 condition, in f8 a, in f8 b) => Vector256.ConditionalSelect(condition.Value, a.Value, b.Value);
+        public static f8 ConditionalSelect(f8 condition, f8 a, f8 b) => Vector256.ConditionalSelect(condition.Value, a.Value, b.Value);
 
         //-------------------------------------------------------------------------------------
         // Comparison operators 
         //-------------------------------------------------------------------------------------
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static f8 operator==(in f8 a, in f8 b) => Vector256.Equals(a.Value, b.Value);
+        public static f8 operator==(f8 a, f8 b) => Vector256.Equals(a.Value, b.Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static f8 operator!=(in f8 a, in f8 b) => ~Vector256.Equals(a.Value, b.Value);
+        public static f8 operator!=(f8 a, f8 b) => ~Vector256.Equals(a.Value, b.Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static f8 operator<(in f8 a, in f8 b) => Vector256.LessThan(a.Value, b.Value);
+        public static f8 operator<(f8 a, f8 b) => Vector256.LessThan(a.Value, b.Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static f8 operator<=(in f8 a, in f8 b) => Vector256.LessThanOrEqual(a.Value, b.Value);
+        public static f8 operator<=(f8 a, f8 b) => Vector256.LessThanOrEqual(a.Value, b.Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static f8 operator>(in f8 a, in f8 b) => Vector256.GreaterThan(a.Value, b.Value);
+        public static f8 operator>(f8 a, f8 b) => Vector256.GreaterThan(a.Value, b.Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static f8 operator>=(in f8 a, in f8 b) => Vector256.GreaterThanOrEqual(a.Value, b.Value);
+        public static f8 operator>=(f8 a, f8 b) => Vector256.GreaterThanOrEqual(a.Value, b.Value);
 
         //-------------------------------------------------------------------------------------
         // Comparison functions
         //-------------------------------------------------------------------------------------
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static f8 Max(in f8 a, in f8 b) => Vector256.Max(a.Value, b.Value);
+        public static f8 Max(f8 a, f8 b) => Vector256.Max(a.Value, b.Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static f8 Min(in f8 a, in f8 b) => Vector256.Min(a.Value, b.Value);
+        public static f8 Min(f8 a, f8 b) => Vector256.Min(a.Value, b.Value);
 
         //-------------------------------------------------------------------------------------
         // Basic math functions 
@@ -191,16 +191,16 @@ namespace Ara3D.F8
         public f8 Ceiling() => Vector256.Ceiling(Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public f8 Clamp(in f8 min, in f8 max) => Vector256.Clamp(Value, min.Value, max.Value);
+        public f8 Clamp(f8 min, f8 max) => Vector256.Clamp(Value, min.Value, max.Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public f8 DegreesToRadians() => Vector256.DegreesToRadians(Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public f8 CopySign(in f8 value, in f8 sign) => Vector256.CopySign(value.Value, sign.Value);
+        public f8 CopySign(f8 value, f8 sign) => Vector256.CopySign(value.Value, sign.Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Dot(in f8 a, in f8 b) => Vector256.Dot(a.Value, b.Value);
+        public static float Dot(f8 a, f8 b) => Vector256.Dot(a.Value, b.Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public f8 Exp() => Vector256.Exp(Value);
@@ -209,7 +209,7 @@ namespace Ara3D.F8
         public f8 Floor() => Vector256.Floor(Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static f8 Hypot(in f8 x, in f8 y) => Vector256.Hypot(x.Value, y.Value);
+        public static f8 Hypot(f8 x, f8 y) => Vector256.Hypot(x.Value, y.Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public f8 IsNaN() => Vector256.IsNaN(Value);
@@ -227,7 +227,7 @@ namespace Ara3D.F8
         public f8 IsZero() => Vector256.IsZero(Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static f8 Lerp(in f8 a, in f8 b, in f8 t) => Vector256.Lerp(a.Value, b.Value, t.Value);
+        public static f8 Lerp(f8 a, f8 b, f8 t) => Vector256.Lerp(a.Value, b.Value, t.Value);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public f8 Log() => Vector256.Log(Value);
