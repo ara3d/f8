@@ -36,7 +36,7 @@ namespace Ara3D.F8.Tests
             return r;
         }
 
-        public static f8[] SimdFloats = Generate<f8>(Count * 16);
+        public static Vector8[] SimdFloats = Generate<Vector8>(Count * 16);
         public static SimdVector3[] SimdPoints = Generate<SimdVector3>(Count);
         public static SimdTriangle[] SimdTriangles = Generate<SimdTriangle>(Count);
 

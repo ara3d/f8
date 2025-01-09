@@ -75,7 +75,7 @@ namespace Ara3D.F8.Tests
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void ComputeSimdPerimeters(SimdTriangle[] inputs, f8[] outputs)
+        public static void ComputeSimdPerimeters(SimdTriangle[] inputs, Vector8[] outputs)
         {
             var cnt = inputs.Length;
             for (int i = 0; i < cnt; i++)
@@ -115,7 +115,7 @@ namespace Ara3D.F8.Tests
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void ComputeSimdSums(f8[] inputs, f8[] outputs)
+        public static void ComputeSimdSums(Vector8[] inputs, Vector8[] outputs)
         {
             var cnt = inputs.Length;
             for (int i = 0; i < cnt; i++)
@@ -173,7 +173,7 @@ namespace Ara3D.F8.Tests
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void ComputeSimdQuadratic(f8[] inputs, f8[] outputs)
+        public static void ComputeSimdQuadratic(Vector8[] inputs, Vector8[] outputs)
         {
             for (int i = 0; i < outputs.Length; i++)
             {
@@ -200,7 +200,7 @@ namespace Ara3D.F8.Tests
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void ComputeSimdSqrts(f8[] inputs, f8[] outputs)
+        public static void ComputeSimdSqrts(Vector8[] inputs, Vector8[] outputs)
         {
             for (int i = 0; i < outputs.Length; i++)
             {
@@ -227,14 +227,14 @@ namespace Ara3D.F8.Tests
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void ComputeSimdLerps(f8[] inputs, f8[] outputs)
+        public static void ComputeSimdLerps(Vector8[] inputs, Vector8[] outputs)
         {
             for (int i = 0; i < outputs.Length; i++)
             {
                 var a = inputs[i * 4];
                 var b = inputs[i * 4 + 1];
                 var t = inputs[i * 4 + 2];
-                outputs[i] = f8.Lerp(a, b, t);
+                outputs[i] = Vector8.Lerp(a, b, t);
             }
         }
 
@@ -269,7 +269,7 @@ namespace Ara3D.F8.Tests
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void ComputeSimdCircles(f8[] inputs, f8[] outputs)
+        public static void ComputeSimdCircles(Vector8[] inputs, Vector8[] outputs)
         {
             for (int i = 0; i < inputs.Length; i++)
             {
@@ -298,7 +298,7 @@ namespace Ara3D.F8.Tests
         {
             var input1 = RandomInputs.SimdFloats;
             var input2 = RandomInputs.Floats;
-            var output1 = new f8[input1.Length / 4];
+            var output1 = new Vector8[input1.Length / 4];
             var output2 = new float[input2.Length / 4];
 
             RunComparison(input1, input2, output1, output2,
@@ -310,7 +310,7 @@ namespace Ara3D.F8.Tests
         {
             var input1 = RandomInputs.SimdTriangles;
             var input2 = RandomInputs.Triangles;
-            var output1 = new f8[input1.Length];
+            var output1 = new Vector8[input1.Length];
             var output2 = new float[input2.Length];
 
             RunComparison(input1, input2, output1, output2,
@@ -334,7 +334,7 @@ namespace Ara3D.F8.Tests
         {
             var input1 = RandomInputs.SimdFloats;
             var input2 = RandomInputs.Floats;
-            var output1 = new f8[input1.Length / 4];
+            var output1 = new Vector8[input1.Length / 4];
             var output2 = new float[input2.Length / 4];
 
             RunComparison(input1, input2, output1, output2,
@@ -358,7 +358,7 @@ namespace Ara3D.F8.Tests
         {
             var input1 = RandomInputs.SimdFloats;
             var input2 = RandomInputs.Floats;
-            var output1 = new f8[3];
+            var output1 = new Vector8[3];
             var output2 = new float[1];
 
             RunComparison(input1, input2, output1, output2,
@@ -370,7 +370,7 @@ namespace Ara3D.F8.Tests
         {
             var input1 = RandomInputs.SimdFloats;
             var input2 = RandomInputs.Floats;
-            var output1 = new f8[input1.Length / 4];
+            var output1 = new Vector8[input1.Length / 4];
             var output2 = new float[input2.Length / 4];
 
             RunComparison(input1, input2, output1, output2,
@@ -399,7 +399,7 @@ namespace Ara3D.F8.Tests
             var input1 = RandomInputs.SimdFloats.Take(n1).ToArray();
             var input2 = RandomInputs.Floats.Take(n2).ToArray();
 
-            var output1 = new f8[n1 * 2];
+            var output1 = new Vector8[n1 * 2];
             var output2 = new float[n2 * 2];
 
             RunComparison(input1, input2, output1, output2,
