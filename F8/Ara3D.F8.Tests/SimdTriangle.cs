@@ -17,9 +17,9 @@ namespace Ara3D.F8.Tests
         public SimdVector3 Normal() => SimdVector3.Cross(B - A, C - A).Normal();
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Vector8 Perimeter() => (B - A).Length() + (C - B).Length() + (A - C).Length();
+        public f8 Perimeter() => (B - A).Length() + (C - B).Length() + (A - C).Length();
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public SimdVector3 Barycentric(Vector8 u, Vector8 v) => A * (1 - u - v) + B * u + C * v;
+        public SimdVector3 Barycentric(f8 u, f8 v) => A * (1 - u - v) + B * u + C * v;
     }
 }
